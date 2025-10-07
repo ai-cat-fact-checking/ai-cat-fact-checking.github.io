@@ -6,22 +6,6 @@ permalink: /404.html
 <head>
   <meta charset="utf-8">
   <title>Redirecting...</title>
-  <script type="text/javascript">
-    // Jekyll will convert the YAML data into a JSON object.
-    const redirects = {{ site.data.redirects | jsonify }};
-    const path = window.location.pathname.replace(/\/$/, "").substring(1);
-
-    // Find the redirect object for the current path
-    const redirect = redirects.find(r => r.short === path);
-
-    if (redirect) {
-      // If a redirect is found, go to the long URL
-      window.location.replace(redirect.long);
-    } else {
-      // If no redirect is found, redirect to the home page
-      window.location.replace("/");
-    }
-  </script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GNWEYWJRY8"></script>
   <script>
@@ -30,6 +14,30 @@ permalink: /404.html
     gtag('js', new Date());
 
     gtag('config', 'G-GNWEYWJRY8');
+
+    // --- Redirect Logic with GA Callback ---
+    const redirects = {{ site.data.redirects | jsonify }};
+    const path = window.location.pathname.replace(/\/$/, "").substring(1);
+    const redirect = redirects.find(r => r.short === path);
+    const destinationUrl = redirect ? redirect.long : "/";
+
+    // This flag prevents the redirect from firing twice
+    let redirected = false;
+    function performRedirect() {
+      if (!redirected) {
+        redirected = true;
+        window.location.replace(destinationUrl);
+      }
+    }
+
+    // Set a timeout as a fallback in case GA fails
+    setTimeout(performRedirect, 1000);
+
+    // Send a page_view event to GA and use the redirect as a callback
+    gtag('event', 'page_view', {
+      'event_callback': performRedirect,
+      'page_path': window.location.pathname + window.location.search
+    });
   </script>
 </head>
 <body>
