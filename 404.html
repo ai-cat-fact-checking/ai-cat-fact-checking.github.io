@@ -18,7 +18,7 @@ permalink: /404.html
     // --- Redirect Logic with GA Callback ---
     const redirects = {{ site.data.redirects | jsonify }};
     const path = window.location.pathname.replace(/\/$/, "").substring(1);
-    const redirect = redirects.find(r => r.short === path);
+    const redirect = redirects.find(r => r.short.toLowerCase() === path.toLowerCase());
     const destinationUrl = redirect ? redirect.long : "/";
 
     // This flag prevents the redirect from firing twice
