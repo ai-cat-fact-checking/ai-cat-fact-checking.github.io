@@ -1,61 +1,92 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>真假 Meow 一下 | AI 事實查核瀏覽器擴充功能</title>
+    <meta name="description" content="真假 Meow 一下是一款 AI 驅動的事實查核瀏覽器擴充功能，幫助您快速辨別網路資訊的真偽，一鍵查核新聞與文章的可信度。">
+    <meta name="keywords" content="事實查核, 假新聞, AI, 瀏覽器擴充功能, 真相, 查核, fact-check, 假訊息, 媒體識讀">
+    <meta name="author" content="真假 Meow 一下團隊">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://factcat.xyz/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://factcat.xyz/">
+    <meta property="og:title" content="真假 Meow 一下 | AI 事實查核瀏覽器擴充功能">
+    <meta property="og:description" content="AI 驅動的事實查核工具，幫助您快速辨別網路資訊的真偽，一鍵查核新聞與文章的可信度。">
+    <meta property="og:image" content="https://factcat.xyz/assets/og-image.png">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:site_name" content="真假 Meow 一下">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://factcat.xyz/">
+    <meta name="twitter:title" content="真假 Meow 一下 | AI 事實查核瀏覽器擴充功能">
+    <meta name="twitter:description" content="AI 驅動的事實查核工具，幫助您快速辨別網路資訊的真偽，一鍵查核新聞與文章的可信度。">
+    <meta name="twitter:image" content="https://factcat.xyz/assets/og-image.png">
+
+    <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="assets/icon.ico">
     <link rel="icon" type="image/png" href="assets/icon.png">
-    <title>真假 Meow 一下</title>
+    <link rel="apple-touch-icon" href="assets/icon.png">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #fdfdfd;
-            color: #333;
-            text-align: center;
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "真假 Meow 一下",
+        "alternateName": "FactCat",
+        "url": "https://factcat.xyz/",
+        "description": "AI 驅動的事實查核瀏覽器擴充功能，幫助您快速辨別網路資訊的真偽。",
+        "applicationCategory": "BrowserApplication",
+        "operatingSystem": "Chrome, Firefox, Edge",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "TWD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "真假 Meow 一下團隊",
+            "url": "https://factcat.xyz/"
         }
-        h1 {
-            font-size: 4.5rem;
-            text-shadow: 3px 3px 5px rgba(0,0,0,0.1);
-            cursor: default;
-            margin-bottom: 20px;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 24px;
-            background-color: #ff9800;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
-        }
-        .btn:hover {
-            background-color: #e68a00;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
-        }
-    </style>
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="assets/style.css">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GNWEYWJRY8"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'G-GNWEYWJRY8');
     </script>
 </head>
+
 <body>
 
     <!--
@@ -66,21 +97,34 @@
            ( o.o )
             > ^ <
         
-        這隻貓說，臭豆腐是宇宙的真理。
+        這隻貓說，事實查核是宇宙的真理喵～
     -->
 
-    <h1>真假 Meow 一下</h1>
+    <main role="main">
+        <header>
+            <img src="assets/cat.gif" alt="FactCat Mascot" class="mascot">
+            <h1>真假 Meow 一下</h1>
+            <p class="tagline">AI 驅動的事實查核工具，讓假新聞無所遁形</p>
+        </header>
 
-    <a href="https://factcat.xyz/extension" class="btn">
-        <i class="fas fa-paw"></i>
-        <span>超讚的擴充功能</span>
-    </a>
+        <section aria-label="下載擴充功能">
+            <a href="https://factcat.xyz/extension" class="btn" aria-label="下載真假 Meow 一下瀏覽器擴充功能">
+                <i class="fas fa-paw" aria-hidden="true"></i>
+                <span>超讚的擴充功能</span>
+            </a>
+        </section>
 
-    <script>
-        // 打開主控台是個好習慣！
-        console.log("你發現了秘密訊息！這是一份給你的臭豆腐：■");
-        console.log("...開玩笑的，這是一隻貓： ᓚᘏᗢ");
-    </script>
+        <section class="video-container" aria-label="介紹影片">
+            <iframe width="1455" height="633" src="https://www.youtube.com/embed/i3JZUAlNQPU" title="事實貓咪偵探社｜安裝教學與功能介紹"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </section>
+    </main>
+
+    <!-- External JS -->
+    <script src="assets/script.js"></script>
 
 </body>
+
 </html>
