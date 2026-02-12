@@ -44,7 +44,7 @@ header {
     border-radius: 50%;
     margin-bottom: 24px;
     animation: float 6s ease-in-out infinite;
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
 }
 
 h1 {
@@ -95,7 +95,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0));
+    background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -114,6 +114,30 @@ h1 {
 }
 
 /* Video Section */
+.videos-section {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+}
+
+.video-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+}
+
+.video-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0 0 16px 0;
+    text-align: center;
+}
+
 .video-container {
     width: 100%;
     max-width: 900px;
@@ -137,19 +161,36 @@ h1 {
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     h1 {
-        font-size: 3rem;
+        font-size: clamp(2rem, 8vw, 3rem);
+        /* 使用 clamp 動態調整字體 */
+        white-space: nowrap;
+        /* 強制不換行 */
     }
 
     .tagline {
@@ -167,7 +208,12 @@ h1 {
         padding: 14px 24px;
         font-size: 1.1rem;
     }
-    
+
+    .videos-section {
+        flex-direction: column;
+        gap: 32px;
+    }
+
     .video-container {
         border-width: 4px;
         border-radius: 16px;
