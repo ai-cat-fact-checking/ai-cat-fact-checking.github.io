@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>「真假 Meow 一下」完整使用教學</title>
+<style>
+:root{
+  --ink:#20160f; --ink2:#4a3a2c; --muted:#7a6857;
+  --paper:#fffaf3; --card:#ffffff; --line:#ecdfcd;
+  --brand:#e8802a; --brand-d:#c25f12; --brand-l:#fff1e2;
+  --green:#1f8a5b; --green-l:#e6f6ee;
+  --blue:#2563c9; --blue-l:#e8f0ff;
+  --red:#c2372f; --red-l:#fdecea;
+  --amber:#b47600; --amber-l:#fff6df;
+  --r:16px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Hiragino Sans TC",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:19px; line-height:1.85; letter-spacing:.01em;
+}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px 90px}
+p{margin:0 0 1em}
+strong{font-weight:800}
+a{color:var(--brand-d);text-underline-offset:3px}
+
+.hero{background:linear-gradient(160deg,#fff3e4 0%,#ffe6cb 55%,#ffdcb8 100%);border-bottom:3px solid #f3d7b4;padding:52px 22px 44px;text-align:center}
+.hero .inner{max-width:920px;margin:0 auto}
+.logo{width:132px;height:auto;margin:0 auto 6px;display:block;filter:drop-shadow(0 3px 6px rgba(80,50,20,.16))}
+.hero h1{font-size:clamp(31px,5.8vw,45px);margin:.12em 0 .18em;letter-spacing:-.01em;font-weight:900}
+.hero .sub{font-size:clamp(17px,2.6vw,21px);color:var(--ink2);margin:0;font-weight:600}
+
+.toc{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:24px 26px;margin:34px 0 10px;box-shadow:0 2px 0 #f0e4d3}
+.toc h2{margin:0 0 12px;font-size:22px}
+.toc ol{margin:0;padding-left:1.4em;columns:2;column-gap:34px}
+.toc li{margin:.3em 0;break-inside:avoid}
+.toc a{text-decoration:none;font-weight:700;color:var(--ink2)}
+.toc a:hover{color:var(--brand-d);text-decoration:underline}
+@media(max-width:640px){.toc ol{columns:1}}
+
+section{margin:52px 0 0;scroll-margin-top:16px}
+h2.sec{font-size:clamp(24px,4.2vw,31px);margin:0 0 8px;font-weight:900;letter-spacing:-.01em;display:flex;align-items:center;gap:13px}
+h2.sec .n{flex:0 0 auto;width:46px;height:46px;border-radius:13px;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:900;box-shadow:0 3px 0 var(--brand-d)}
+.lede{color:var(--muted);font-size:17px;margin:0 0 22px;padding-left:59px}
+@media(max-width:560px){.lede{padding-left:0}}
+h3{font-size:22px;margin:32px 0 10px;font-weight:800}
+h4{font-size:19px;margin:22px 0 8px;font-weight:800}
+hr.rule{border:0;border-top:2px dashed var(--line);margin:44px 0}
+
+.step{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px;box-shadow:0 2px 0 #f0e4d3}
+.step-h{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px}
+.step-n{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--brand-l);border:2px solid var(--brand);color:var(--brand-d);display:grid;place-items:center;font-weight:900;font-size:19px}
+.step-t{font-size:21px;font-weight:800;margin:4px 0 0;line-height:1.4}
+.step-b{padding-left:54px}
+@media(max-width:560px){.step-b{padding-left:0}}
+
+.note{border-left:6px solid;border-radius:10px;padding:15px 19px;margin:18px 0;font-size:18px}
+.note p:last-child{margin-bottom:0}
+.note .lab{font-weight:900;display:block;margin-bottom:3px}
+.tip{background:var(--green-l);border-color:var(--green)} .tip .lab{color:var(--green)}
+.warn{background:var(--amber-l);border-color:var(--amber)} .warn .lab{color:#8a5a00}
+.danger{background:var(--red-l);border-color:var(--red)} .danger .lab{color:var(--red)}
+.info{background:var(--blue-l);border-color:var(--blue)} .info .lab{color:var(--blue)}
+
+.tw{overflow-x:auto;margin:18px 0;border:2px solid var(--line);border-radius:var(--r);background:#fff}
+table{border-collapse:collapse;width:100%;font-size:17px;min-width:540px}
+th,td{padding:13px 15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#fdf6ec;font-weight:800;font-size:16px}
+tbody tr:last-child td{border-bottom:0}
+
+.mock{margin:20px 0;border-radius:14px;overflow:hidden;border:2px solid #d8ccbb;box-shadow:0 6px 18px rgba(60,40,20,.13);background:#fff}
+.mock-cap{font-size:15px;color:var(--muted);margin:8px 2px 0;text-align:center;font-style:italic}
+.chrome-bar{background:#dee1e6;padding:8px 10px 0;display:flex;align-items:flex-end;gap:8px}
+.dots{display:flex;gap:6px;padding:0 6px 9px}
+.dots i{width:11px;height:11px;border-radius:50%;display:block}
+.dots i:nth-child(1){background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+.tab{background:#fff;border-radius:9px 9px 0 0;padding:7px 15px;font-size:14px;font-weight:700;color:#3c4043;display:flex;align-items:center;gap:7px;max-width:300px;overflow:hidden;white-space:nowrap}
+.urlbar{background:#fff;padding:8px 10px;display:flex;align-items:center;gap:9px;border-bottom:1px solid #e3e0dc}
+.url{flex:1;background:#f1f3f4;border-radius:999px;padding:7px 15px;font-size:14px;color:#3c4043;font-family:ui-monospace,Menlo,Consolas,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.icn{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:15px;flex:0 0 auto}
+.mock-body{padding:22px}
+.gbtn{background:#1a73e8;color:#fff;border-radius:999px;padding:10px 24px;font-size:15px;font-weight:700;display:inline-block;border:0}
+.gbtn.ghost{background:#fff;color:#1a73e8;border:1px solid #dadce0}
+.cursor{position:relative}
+.cursor::after{content:"";position:absolute;right:-26px;top:50%;width:20px;height:26px;background:no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30'><path d='M2 1 L2 24 L8 18.5 L12 28 L16 26 L12 17 L20 16 Z' fill='%23111' stroke='white' stroke-width='1.6'/></svg>")}
+
+/* settings-page mock */
+.opt{background:#fff;border:2px solid #e6e0d6;border-radius:14px;overflow:hidden}
+.opt-h{padding:17px 20px;border-bottom:2px solid #f0ebe3;background:#fdfaf6}
+.opt-h h4{margin:0;font-size:19px}
+.opt-h .hint{font-size:14.5px;color:var(--muted);margin:5px 0 0;line-height:1.65}
+.opt-b{padding:16px 20px}
+.radio{border:2px solid #e6e0d6;border-radius:12px;padding:13px 15px;margin:0 0 11px;display:flex;gap:12px;align-items:flex-start;background:#fff}
+.radio.on{border-color:var(--brand);background:var(--brand-l)}
+.radio .dot{flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:2px solid #b9ad9c;margin-top:4px;background:#fff}
+.radio.on .dot{border-color:var(--brand);box-shadow:inset 0 0 0 4px #fff;background:var(--brand)}
+.radio .ttl{font-weight:900;font-size:17px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.radio .dsc{font-size:15px;color:var(--ink2);line-height:1.65;margin-top:3px}
+.chip{font-size:12.5px;font-weight:800;border-radius:999px;padding:2px 10px;letter-spacing:.02em}
+.chip.rec{background:var(--green);color:#fff}
+.chip.pri{background:var(--blue-l);color:var(--blue);border:1px solid #b9cdf5}
+.chip.key{background:var(--amber-l);color:#8a5a00;border:1px solid #e8cf97}
+.statusline{background:#f6f2ec;border-radius:9px;padding:10px 14px;font-size:14.5px;color:var(--ink2);margin-top:4px}
+.field{display:flex;gap:8px;margin:9px 0 0}
+.field input{flex:1;border:2px solid #ddd5c9;border-radius:9px;padding:9px 13px;font-size:15px;background:#fff;color:#999;font-family:inherit}
+.sbtn{border:0;border-radius:9px;padding:9px 17px;font-size:15px;font-weight:800;background:var(--brand);color:#fff}
+.sbtn.g{background:#fff;color:var(--brand-d);border:2px solid var(--brand)}
+.sbtn.d{background:#eee7dd;color:#a3947f}
+
+.popup{width:342px;max-width:100%;border:1px solid #e0d8cd;border-radius:14px;background:#fff;box-shadow:0 10px 26px rgba(60,40,20,.18);overflow:hidden;margin:0 auto}
+.popup-h{background:linear-gradient(135deg,#ffb765,#e8802a);color:#fff;padding:13px 16px;font-weight:900;font-size:16px;display:flex;align-items:center;gap:8px}
+.popup-b{padding:15px 16px;font-size:15px;line-height:1.7}
+.pbtn{display:block;width:100%;text-align:center;background:var(--brand);color:#fff;font-weight:800;padding:11px;border-radius:10px;margin:11px 0 0;font-size:15px}
+.pbtn.sec{background:#fff;color:var(--brand-d);border:2px solid var(--brand)}
+
+.demo{background:#fff;border:2px solid var(--line);border-radius:14px;padding:20px 22px;font-size:18px;line-height:2.1}
+mark.f{background:#d9f2e5;border-bottom:3px solid var(--green);padding:2px 3px;border-radius:4px}
+mark.o{background:#e4ecff;border-bottom:3px solid var(--blue);padding:2px 3px;border-radius:4px}
+mark.u{background:#ffe0dd;border-bottom:3px solid var(--red);padding:2px 3px;border-radius:4px}
+mark.c{background:#fff0c9;border-bottom:3px dotted var(--amber);padding:2px 3px;border-radius:4px}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 0;font-size:16px}
+.legend span{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-weight:700}
+.sw{width:16px;height:16px;border-radius:4px;display:inline-block}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:15px;margin:20px 0}
+.tile{background:#fff;border:2px solid var(--line);border-radius:14px;padding:18px 19px;box-shadow:0 2px 0 #f0e4d3}
+.tile h4{margin:0 0 6px;font-size:19px;display:flex;align-items:center;gap:9px}
+.tile p{font-size:16.5px;color:var(--ink2);margin:0}
+.emoji{font-size:24px}
+
+details{background:#fff;border:2px solid var(--line);border-radius:13px;margin:0 0 12px;overflow:hidden}
+summary{cursor:pointer;padding:16px 20px;font-weight:800;font-size:19px;list-style:none;display:flex;gap:11px;align-items:flex-start}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"？";flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--brand-l);color:var(--brand-d);display:grid;place-items:center;font-size:16px;font-weight:900;margin-top:2px}
+details[open] summary{background:#fdf6ec;border-bottom:2px solid var(--line)}
+details .ans{padding:16px 20px 6px}
+
+ul.check{list-style:none;padding:0;margin:16px 0}
+ul.check li{background:#fff;border:2px solid var(--line);border-radius:12px;padding:13px 17px 13px 50px;margin:0 0 10px;position:relative;font-size:18px}
+ul.check li::before{content:"✓";position:absolute;left:16px;top:12px;width:24px;height:24px;border-radius:6px;background:var(--green-l);color:var(--green);display:grid;place-items:center;font-weight:900}
+
+.vid{position:relative;padding-bottom:56.25%;height:0;border-radius:14px;overflow:hidden;border:2px solid var(--line);background:#000;margin:14px 0}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+footer{margin:66px 0 0;padding:26px 0 0;border-top:3px solid var(--line);font-size:16px;color:var(--muted)}
+footer a{font-weight:700}
+.kbd{font-family:ui-monospace,Menlo,Consolas,monospace;background:#f2f0ec;border:1px solid #ddd6cc;border-bottom-width:2px;border-radius:6px;padding:1px 7px;font-size:.9em;font-weight:700;white-space:nowrap}
+@media print{body{font-size:12pt;background:#fff}.hero{background:#fff}.mock{box-shadow:none}details .ans{display:block}.vid{display:none}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="inner">
+    <img class="logo" alt="事實貓咪偵探社" src="assets/factcat-logo.png">
+    <h1>「真假 Meow 一下」完整使用教學</h1>
+    <p class="sub">一個免費的 Chrome 小工具，幫你看穿新聞裡「哪句是事實、哪句只是意見」</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>📖 這份教學包含</h2>
+  <ol>
+    <li><a href="#s1">它是什麼？誰做的？</a></li>
+    <li><a href="#s2">開始前先知道 2 件事</a></li>
+    <li><a href="#s3">安裝步驟（圖解）</a></li>
+    <li><a href="#s4">把貓咪釘在工具列上</a></li>
+    <li><a href="#s5">四種啟動方式</a></li>
+    <li><a href="#s6">設定頁面完整導覽 ⭐</a></li>
+    <li><a href="#s7">第一次查核：實際跑一次</a></li>
+    <li><a href="#s8">看懂查核報告</a></li>
+    <li><a href="#s9">五大類要小心的訊息</a></li>
+    <li><a href="#s10">常見問題 Q&amp;A</a></li>
+    <li><a href="#s11">隱私與權限說明</a></li>
+    <li><a href="#s12">影片、回饋與最重要的提醒</a></li>
+  </ol>
+</nav>
+<!-- 1 -->
+<section id="s1">
+  <h2 class="sec"><span class="n">1</span>它是什麼？誰做的？</h2>
+  <p class="lede">先花一分鐘搞懂這隻貓在幫你做什麼事。</p>
+
+  <p>「<strong>真假 Meow 一下</strong>」（英文名 <strong>FactCat</strong>）是一個裝在 Chrome 上的<strong>免費擴充功能</strong>。看到一篇可疑的新聞，按一下貓咪，它就用 AI 幫你把整篇文章拆開來分析。</p>
+
+  <p>它的分析分成<strong>兩個層次</strong>：</p>
+
+  <div class="grid">
+    <div class="tile">
+      <h4><span class="emoji">📗</span>初階分析</h4>
+      <p>不用登入就能用。分析<strong>網域</strong>、<strong>事實</strong>、<strong>觀點</strong>、<strong>中國用語</strong>四個基本面向。</p>
+    </div>
+    <div class="tile">
+      <h4><span class="emoji">📕</span>進階分析</h4>
+      <p>需要 API Key。針對<strong>國防安全</strong>、<strong>公共衛生</strong>、<strong>經濟貿易</strong>做深度檢視，並用外部來源輔助查證。</p>
+    </div>
+  </div>
+
+  <h3>它的判讀邏輯（參考 IORG 的四步驟）</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:24%">步驟</th><th>在做什麼</th></tr></thead>
+    <tbody>
+      <tr><td><strong>① 拆解訊息</strong></td><td>把文章切開，分出事實、觀點，並看網域與用語特徵</td></tr>
+      <tr><td><strong>② 查證來源內容</strong></td><td>驗證那些「事實」到底站不站得住腳</td></tr>
+      <tr><td><strong>③ 檢驗推論</strong></td><td>就算前提是真的，推出來的結論合理嗎？</td></tr>
+      <tr><td><strong>④ 判定可信度</strong></td><td>綜合以上給出整體評量</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>誰開發的？</h3>
+  <p>由七位<strong>清大、陽交大、成大的理工科學生</strong>組成的「<strong>事實貓咪偵探社</strong>」開發，指導老師劉彥伯。合作與支持單位包括 <strong>台灣數位外交協會（TDDA）</strong>、<strong>台灣事實查核中心</strong>、<strong>中華文化總會</strong>、<strong>台灣網路資訊中心（TWNIC）</strong>、<strong>台灣資訊環境研究中心（IORG）</strong>。<strong>公益專案，完全免費。</strong></p>
+</section>
+
+<hr class="rule">
+
+<!-- 2 -->
+<section id="s2">
+  <h2 class="sec"><span class="n">2</span>開始前先知道 2 件事</h2>
+  <p class="lede">先講清楚，免得期待落空。</p>
+
+  <div class="note warn">
+    <span class="lab">① 它<u>不會</u>直接判你「這篇是假新聞」</span>
+    <p>設定頁面自己寫得很清楚：「<strong>分析結果是模型提供的閱讀提示，不等同已完成事實查核</strong>」。它給你的是整理好的線索，最後那一刀還是你自己下。</p>
+  </div>
+
+  <div class="note warn">
+    <span class="lab">② AI 也會看走眼</span>
+    <p>標成「查無依據」不代表就是假的，標成「事實」也不保證 100% 正確。<strong>報告是切入點，不是最終答案。</strong></p>
+  </div>
+
+  <h3>你需要準備什麼？</h3>
+  <ul class="check">
+    <li><strong>一台電腦</strong>（Windows、Mac 都可以）</li>
+    <li><strong>Google Chrome</strong>（Edge、Brave 等 Chromium 瀏覽器也可以）</li>
+    <li><strong>網路連線</strong></li>
+    <li>就這樣。<strong>不用付錢、不用先註冊、不用信用卡。</strong></li>
+  </ul>
+
+  <div class="note danger">
+    <span class="lab">📱 手機不能用</span>
+    <p>Chrome 擴充功能<strong>只能裝在電腦版</strong>瀏覽器上，手機版 Chrome 不支援。</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- 3 -->
+<section id="s3">
+  <h2 class="sec"><span class="n">3</span>安裝步驟（圖解）</h2>
+  <p class="lede">5 個步驟，大約 2 分鐘。</p>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">1</div><div class="step-t">打開 Chrome 瀏覽器</div></div>
+    <div class="step-b"><p>請務必用 <strong>Google Chrome</strong>。如果你平常用 Safari，先打開 Chrome 再繼續。</p></div>
+  </div>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">2</div><div class="step-t">前往下載頁面</div></div>
+    <div class="step-b">
+      <p>最快的方法：在網址列打上這個<strong>官方短網址</strong>，按 <span class="kbd">Enter</span>，它會自動把你送到商店頁：</p>
+      <div class="mock">
+        <div class="chrome-bar"><div class="dots"><i></i><i></i><i></i></div><div class="tab">🐱 真假 Meow 一下</div></div>
+        <div class="urlbar">
+          <span class="icn" style="background:#f1f3f4">←</span>
+          <span class="icn" style="background:#f1f3f4">↻</span>
+          <div class="url">🔒 factcat.xyz/extension</div>
+        </div>
+      </div>
+      <p class="mock-cap">▲ 輸入 <strong>factcat.xyz/extension</strong> 即可</p>
+      <div class="note warn">
+        <span class="lab">⚠️ 認明開發者</span>
+        <p>商店頁上「提供者」要寫 <strong>ai-fact-checking</strong>。名字很像但開發者不同的，<strong>不要裝</strong>。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">3</div><div class="step-t">按下藍色的「加到 Chrome」</div></div>
+    <div class="step-b">
+      <div class="mock"><div class="mock-body">
+        <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
+          <div style="width:76px;height:76px;border-radius:16px;background:#fff;border:2px solid #eee;display:grid;place-items:center;flex:0 0 auto;overflow:hidden"><img alt="" style="width:100%" src="assets/factcat-logo.png"></div>
+          <div style="flex:1;min-width:200px">
+            <div style="font-size:23px;font-weight:900;color:#202124">真假 Meow 一下</div>
+            <div style="font-size:14px;color:#5f6368;margin-top:3px">ai-fact-checking · factcat.xyz</div>
+            <div style="font-size:14px;color:#5f6368;margin-top:3px">★★★★★ 5.0 · 219 位使用者</div>
+          </div>
+          <div style="flex:0 0 auto;padding-right:30px" class="cursor"><span class="gbtn">加到 Chrome</span></div>
+        </div>
+      </div></div>
+      <p class="mock-cap">▲ 商店頁面示意圖：按右邊的藍色按鈕</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">4</div><div class="step-t">確認權限，按「新增擴充功能」</div></div>
+    <div class="step-b">
+      <div class="mock" style="max-width:480px;margin-left:auto;margin-right:auto"><div class="mock-body">
+        <div style="font-size:17px;font-weight:800;margin-bottom:10px">要新增「真假 Meow 一下」嗎？</div>
+        <div style="font-size:15px;color:#3c4043;line-height:1.9">它可以：<br>
+        • 讀取你<strong>主動點選查核</strong>的那個分頁內容<br>
+        • 使用 Google 帳號登入（你按了才會）<br>
+        • 與 api.factcat.xyz 連線傳送分析請求</div>
+        <div style="text-align:right;margin-top:18px;padding-right:30px" class="cursor">
+          <span class="gbtn ghost">取消</span> <span class="gbtn">新增擴充功能</span>
+        </div>
+      </div></div>
+      <p class="mock-cap">▲ 權限確認視窗示意圖</p>
+      <div class="note tip">
+        <span class="lab">✅ 這些權限合理嗎？</span>
+        <p>合理。要分析文章當然得讀得到內容，而且官方註明是「<strong>僅在用戶觸發時</strong>讀取授權頁面」—— 你不按貓咪，它不會偷看。詳見<a href="#s11">第 11 節</a>。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">5</div><div class="step-t">看到「已加到 Chrome」就完成了 🎉</div></div>
+    <div class="step-b"><p>右上角會冒出小視窗告訴你安裝成功。接著做下一步（釘選），使用會方便非常多。</p></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- 4 -->
+<section id="s4">
+  <h2 class="sec"><span class="n">4</span>把貓咪釘在工具列上</h2>
+  <p class="lede">不做也能用，但做了每次只要按一下。<strong>強烈建議做。</strong></p>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">1</div><div class="step-t">點右上角的拼圖圖示 🧩</div></div>
+    <div class="step-b"><p>它在網址列右邊，長得像一塊拼圖。</p></div>
+  </div>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">2</div><div class="step-t">找到「真假 Meow 一下」，點旁邊的圖釘 📌</div></div>
+    <div class="step-b">
+      <div class="mock" style="max-width:440px;margin-left:auto;margin-right:auto"><div class="mock-body" style="padding:14px">
+        <div style="font-size:15px;font-weight:800;margin-bottom:10px">擴充功能</div>
+        <div style="display:flex;align-items:center;gap:10px;padding:9px 8px;border-radius:8px;background:#f8f9fa">
+          <img alt="" style="width:22px" src="assets/factcat-logo.png">
+          <span style="flex:1;font-size:15px;font-weight:700">真假 Meow 一下</span>
+          <span class="cursor" style="font-size:18px;padding-right:26px">📌</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:9px 8px;border-radius:8px;opacity:.45">
+          <span style="font-size:20px">🧩</span><span style="flex:1;font-size:15px">其他擴充功能…</span><span style="font-size:18px">📌</span>
+        </div>
+      </div></div>
+      <p class="mock-cap">▲ 點右邊的圖釘，把貓咪固定在工具列</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">3</div><div class="step-t">確認貓咪出現在網址列右邊</div></div>
+    <div class="step-b">
+      <div class="mock"><div class="urlbar">
+        <span class="icn" style="background:#f1f3f4">←</span>
+        <span class="icn" style="background:#f1f3f4">↻</span>
+        <div class="url">🔒 www.example-news.com/article/12345</div>
+        <span class="icn" style="background:#fff;border:1px solid #eee;overflow:hidden"><img alt="" style="width:100%" src="assets/factcat-logo.png"></span>
+        <span class="icn" style="background:#f1f3f4">🧩</span>
+        <span class="icn" style="background:#f1f3f4">⋮</span>
+      </div></div>
+      <p class="mock-cap">▲ 成功！</p>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+<!-- 5 -->
+<section id="s5">
+  <h2 class="sec"><span class="n">5</span>四種啟動方式</h2>
+  <p class="lede">很多人只知道按圖示。其實它有四個入口，挑你順手的用。</p>
+
+  <div class="grid">
+    <div class="tile">
+      <h4><span class="emoji">🖱️</span>① 擴充功能快顯視窗</h4>
+      <p>點工具列上的貓咪圖示，跳出小面板 → 按分析。最直覺，新手用這個。</p>
+    </div>
+    <div class="tile">
+      <h4><span class="emoji">📑</span>② 側邊欄</h4>
+      <p>在瀏覽器右側開一條長長的面板，<strong>可以一邊看文章、一邊看報告</strong>。長文章推薦用這個。</p>
+    </div>
+    <div class="tile">
+      <h4><span class="emoji">🖲️</span>③ 右鍵選單</h4>
+      <p>在網頁上按<strong>滑鼠右鍵</strong>，選單裡會有查核的選項。</p>
+    </div>
+    <div class="tile">
+      <h4><span class="emoji">⌨️</span>④ 鍵盤快速鍵</h4>
+      <p>手不離鍵盤，最快。見下方。</p>
+    </div>
+  </div>
+
+  <h3>鍵盤快速鍵（背起來很好用）</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:44%">快速鍵</th><th>功能</th></tr></thead>
+    <tbody>
+      <tr><td><span class="kbd">Alt</span> + <span class="kbd">Shift</span> + <span class="kbd">S</span></td><td><strong>開啟／關閉側邊欄</strong></td></tr>
+      <tr><td><span class="kbd">Alt</span> + <span class="kbd">Shift</span> + <span class="kbd">A</span></td><td><strong>分析當前頁面</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note tip">
+    <span class="lab">💡 最省事的用法</span>
+    <p>看到可疑文章，直接按 <span class="kbd">Alt</span>+<span class="kbd">Shift</span>+<span class="kbd">A</span>，連滑鼠都不用動。</p>
+  </div>
+
+  <div class="note info">
+    <span class="lab">📌 四個入口共用同一個設定</span>
+    <p>你在設定頁面選的「分析方式」，會同時套用到<strong>側邊欄、快顯視窗、右鍵選單、快速鍵</strong>。改一次就好，不用每個地方各設一次。</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- 6 -->
+<section id="s6">
+  <h2 class="sec"><span class="n">6</span>設定頁面完整導覽</h2>
+  <p class="lede">這一節最重要。設定頁面決定了它「用什麼方式」幫你分析。</p>
+
+  <h3>怎麼打開設定頁面？</h3>
+  <p>兩種方法：<br>
+  ⒜ 點貓咪圖示 → 面板裡的<strong>設定</strong>按鈕。<br>
+  ⒝ 在貓咪圖示上按<strong>滑鼠右鍵</strong> → 選「<strong>選項</strong>」。</p>
+  <p>打開後你會看到標題「<strong>🔍 真假 Meow 一下設定</strong>」，底下分成三大區塊。</p>
+
+  <!-- 6-1 -->
+  <h3>6-1　🧠 分析方式（三選一）</h3>
+  <p>這是整個設定頁的核心。它有<strong>三個</strong>選項，不是兩個：</p>
+
+  <div class="opt">
+    <div class="opt-h">
+      <h4>🧠 分析方式</h4>
+      <p class="hint">此設定會套用於側邊欄、擴充功能快顯視窗、右鍵選單與鍵盤快速鍵。之後可隨時更改，不必登出帳號。</p>
+    </div>
+    <div class="opt-b">
+      <div class="radio on">
+        <span class="dot"></span>
+        <span>
+          <span class="ttl">自動選擇 <span class="chip rec">建議</span></span>
+          <span class="dsc">已設定個人 API Key 時使用網路輔助分析；尚未設定時改用 Chrome 內建模型在裝置上分析。</span>
+        </span>
+      </div>
+      <div class="radio">
+        <span class="dot"></span>
+        <span>
+          <span class="ttl">本地分析 <span class="chip pri">正文留在裝置</span></span>
+          <span class="dsc">即使已登入且設定 API Key，仍固定使用 Chrome 內建模型。可初步辨識論據、觀點與摘要；不會查詢外部來源或判定主張真偽，結果也不儲存至分析伺服器。</span>
+        </span>
+      </div>
+      <div class="radio">
+        <span class="dot"></span>
+        <span>
+          <span class="ttl">網路輔助分析 <span class="chip key">需個人 API Key</span></span>
+          <span class="dsc">新聞正文會送至偵探社分析伺服器，並使用你的 Gemini API Key。可使用外部來源輔助查證、媒體網域資訊與進階分析。</span>
+        </span>
+      </div>
+      <div class="statusline">目前：自動選擇將使用本地分析，因為尚未設定 API Key。</div>
+    </div>
+  </div>
+  <p class="mock-cap">▲ 設定頁「分析方式」區塊（依實際介面用語重繪）</p>
+
+  <h4>三種模式的白話比較</h4>
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:20%"></th><th>🔄 自動選擇</th><th>🏠 本地分析</th><th>🌐 網路輔助分析</th></tr></thead>
+    <tbody>
+      <tr><th>白話說</th><td>有金鑰就走雲端，沒金鑰就用本機</td><td><strong>永遠</strong>用本機，就算你有金鑰</td><td><strong>永遠</strong>走雲端</td></tr>
+      <tr><th>要登入嗎</th><td>看情況</td><td>不用</td><td>要</td></tr>
+      <tr><th>要 API Key 嗎</th><td>不一定</td><td>不用</td><td>要</td></tr>
+      <tr><th>文章送出去嗎</th><td>看情況</td><td><strong>不會</strong>，留在你電腦</td><td>會送到分析伺服器</td></tr>
+      <tr><th>能做什麼</th><td>依當下模式而定</td><td>辨識論據、觀點、摘要</td><td>外部來源查證、媒體網域資訊、進階分析</td></tr>
+      <tr><th>不能做什麼</th><td>—</td><td><strong>不查外部來源、不判定主張真偽</strong></td><td>—</td></tr>
+      <tr><th>誰適合</th><td>大部分人（預設值）</td><td>最在意隱私、或不想申請金鑰</td><td>要完整查核報告</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note tip">
+    <span class="lab">🎯 不知道選哪個？</span>
+    <p><strong>什麼都別改，維持預設的「自動選擇」就好。</strong>你沒設金鑰時它自動用本地模式；哪天你設了金鑰，它自己就升級成網路輔助分析。</p>
+  </div>
+
+  <div class="note warn">
+    <span class="lab">⚠️ 本地分析的重要限制</span>
+    <p>設定頁面自己講明了：本地分析「<strong>不會查詢外部來源或判定主張真偽</strong>」。也就是說，它只能幫你把句子分成「這句是論據 / 這句是觀點」，<strong>不會告訴你那句話到底是真是假</strong>。想要真的「查核」，得用網路輔助分析。</p>
+  </div>
+
+  <div class="note info">
+    <span class="lab">🖥️ 本地分析需要新版 Chrome</span>
+    <p>它用的是「<strong>Chrome 內建模型</strong>」，這是瀏覽器的新功能，需要較新版本的 Chrome，第一次使用時可能要先下載模型檔案，對電腦硬體也有基本要求。跑不動的話先到 <span class="kbd">chrome://settings/help</span> 更新 Chrome。內建模型官方目前以英文、日文、西班牙文、德文、法文為主，<strong>繁中品質會因 Chrome 版本與裝置而異，適合作為初步閱讀參考</strong>。</p>
+  </div>
+
+  <!-- 6-2 -->
+  <h3>6-2　🔐 Google 帳號</h3>
+  <p>很多人一進設定頁看到「登入」就卡住了。<strong>其實你不一定要登入。</strong></p>
+
+  <div class="opt">
+    <div class="opt-h">
+      <h4>🔐 Google 帳號</h4>
+      <p class="hint">本地分析不需登入。只有儲存個人 API Key、使用網路輔助分析或帳號與留言功能時才需要登入。</p>
+    </div>
+    <div class="opt-b">
+      <p style="margin:0 0 10px;font-size:15.5px;color:#4a3a2c">目前未登入；仍可使用本地分析。</p>
+      <button class="sbtn">登入 Google</button>
+    </div>
+  </div>
+  <p class="mock-cap">▲ 未登入時的樣子</p>
+
+  <h4>什麼時候「才需要」登入？</h4>
+  <ul class="check">
+    <li>要<strong>儲存個人 API Key</strong> 的時候</li>
+    <li>要使用<strong>網路輔助分析</strong>的時候</li>
+    <li>要使用<strong>帳號與留言功能</strong>的時候</li>
+  </ul>
+  <p>除此之外，<strong>不登入也能正常用本地分析</strong>。登入之後，這一區會變成顯示你的頭像、名字、Email，以及一顆「登出」按鈕。</p>
+
+  <!-- 6-3 -->
+  <h3>6-3　🔑 個人 Gemini API Key（<span style="color:var(--muted);font-weight:700">選填</span>）</h3>
+  <p>這一區標題就寫著「<strong>選填</strong>」—— 不填也能用本地分析。要用進階功能才需要。</p>
+
+  <div class="opt">
+    <div class="opt-h">
+      <h4>🔑 選填：個人 Gemini API Key</h4>
+      <p class="hint">不填 Key 也能使用本地分析。若要使用外部來源輔助查證、媒體網域資訊與網路進階分析，請先登入，再至 Google AI Studio 建立個人 Gemini API Key。</p>
+    </div>
+    <div class="opt-b">
+      <div style="font-size:15.5px;font-weight:800">Gemini API Key：</div>
+      <div class="field">
+        <input value="請輸入您的 Gemini API Key" readonly>
+        <button class="sbtn g">👁️</button>
+      </div>
+      <p style="font-size:14px;color:var(--muted);margin:8px 0 12px;line-height:1.6">API Key 會以加密格式儲存至帳號資料，並在網路輔助分析時由服務解密使用；選擇本地分析時不會使用它。</p>
+      <div style="display:flex;gap:9px;flex-wrap:wrap">
+        <button class="sbtn d">儲存 API Key</button>
+        <button class="sbtn d">測試連線</button>
+      </div>
+      <div class="statusline" style="margin-top:12px">未登入：仍可使用本地分析；登入後才能儲存個人 API Key。</div>
+    </div>
+  </div>
+  <p class="mock-cap">▲ 未登入時，兩顆按鈕是<strong>灰色不能按</strong>的 —— 這是正常的，先去上面登入就好</p>
+
+  <div class="note warn">
+    <span class="lab">❗ 順序很重要：先登入，再存金鑰</span>
+    <p>如果你直接貼上金鑰卻按不了「儲存」，不是壞掉 —— 是<strong>還沒登入</strong>。請先回到上面的「🔐 Google 帳號」區塊按「登入 Google」，兩顆按鈕就會亮起來。</p>
+  </div>
+
+  <h4>申請並設定金鑰的完整流程</h4>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">1</div><div class="step-t">先在設定頁「登入 Google」</div></div>
+    <div class="step-b"><p>沒登入的話金鑰存不進去。</p></div>
+  </div>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">2</div><div class="step-t">到 Google AI Studio 建立金鑰</div></div>
+    <div class="step-b">
+      <p>設定頁面上那個連結會帶你到 <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>。登入後按「<strong>Create API key</strong>」。</p>
+      <p>什麼是 API 金鑰？可以想成「<strong>一把讓程式代你去使用 Google AI 的鑰匙</strong>」。因為這是免費公益專案，團隊沒辦法幫所有人付 AI 費用，所以請你用自己的鑰匙。</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">3</div><div class="step-t">複製那一長串金鑰</div></div>
+    <div class="step-b">
+      <p>會產生一串像 <span class="kbd">AIzaSy……</span> 的英數字，整串複製起來。</p>
+      <div class="note danger">
+        <span class="lab">🔐 這串等同你的鑰匙，請保管好</span>
+        <p>不要貼到 LINE 群組、不要截圖分享。任何拿到它的人都能用你的額度。<strong>不小心外流的話，回 AI Studio 把那把刪掉（Delete）再產生一把新的就好。</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">4</div><div class="step-t">貼回設定頁，按「儲存 API Key」</div></div>
+    <div class="step-b">
+      <p>欄位預設是<strong>密碼形式（顯示成圓點）</strong>，旁邊的 <strong>👁️</strong> 按鈕可以切換顯示／隱藏，方便你檢查有沒有貼錯。</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">5</div><div class="step-t">按「測試連線」確認可以用</div></div>
+    <div class="step-b">
+      <p>這顆按鈕是用來<strong>驗證金鑰是否有效</strong>的。存完就按一下，比等到分析失敗才發現金鑰打錯好得多。</p>
+      <div class="note tip"><span class="lab">✅ 成功之後</span><p>設定完成後，畫面上方的狀態列會更新，「自動選擇」模式也會自動改用<strong>網路輔助分析</strong>。</p></div>
+    </div>
+  </div>
+
+  <div class="note warn">
+    <span class="lab">💸 會不會被扣錢？</span>
+    <p>Google Gemini API 有免費方案，一般個人查文章的用量通常在免費額度內。但若你的 Google 帳號有綁定付費專案或用量很大，仍可能產生費用。<strong>這是 Google 的計費規則，與這個擴充功能無關。</strong></p>
+  </div>
+
+  <!-- 6-4 -->
+  <h3>6-4　⌨️ 鍵盤快速鍵</h3>
+  <p>設定頁面最下方會列出快速鍵，就是<a href="#s5">第 5 節</a>提到的 <span class="kbd">Alt</span>+<span class="kbd">Shift</span>+<span class="kbd">S</span>（側邊欄）和 <span class="kbd">Alt</span>+<span class="kbd">Shift</span>+<span class="kbd">A</span>（分析當前頁面）。</p>
+  <div class="note info">
+    <span class="lab">🛠️ 想改快速鍵？</span>
+    <p>到網址列輸入 <span class="kbd">chrome://extensions/shortcuts</span>，可以自訂成你順手的組合（例如跟其他軟體衝突時）。</p>
+  </div>
+</section>
+<hr class="rule">
+
+<!-- 7 -->
+<section id="s7">
+  <h2 class="sec"><span class="n">7</span>第一次查核：實際跑一次</h2>
+  <p class="lede">設定看完了，來實際做一遍。</p>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">1</div><div class="step-t">打開你想查的那篇文章</div></div>
+    <div class="step-b">
+      <p>要停在<strong>文章本身的頁面</strong>，不是新聞網站的首頁或列表頁。它分析的是「你現在看的這一頁」。</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">2</div><div class="step-t">按貓咪圖示，或直接按 <span class="kbd">Alt</span>+<span class="kbd">Shift</span>+<span class="kbd">A</span></div></div>
+    <div class="step-b">
+      <div style="margin:20px 0"><div class="popup">
+        <div class="popup-h">🔍 真假 Meow 一下</div>
+        <div class="popup-b">
+          <div style="font-size:13px;color:#7a6857">目前頁面</div>
+          <div style="font-weight:800;margin-bottom:6px">震驚！專家爆料某某政策將導致⋯⋯</div>
+          <div style="font-size:13px;color:#7a6857">example-news.com</div>
+          <span class="pbtn cursor" style="padding-right:34px">分析這篇文章</span>
+          <span class="pbtn sec">⚙️ 設定</span>
+        </div>
+      </div></div>
+      <p class="mock-cap">▲ 快顯視窗示意圖（實際版面可能略有不同）</p>
+      <div class="note tip">
+        <span class="lab">💡 長文章建議開側邊欄</span>
+        <p>按 <span class="kbd">Alt</span>+<span class="kbd">Shift</span>+<span class="kbd">S</span> 開側邊欄，就能一邊捲文章、一邊對照報告，不用一直開開關關。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-h"><div class="step-n">3</div><div class="step-t">等它跑完，看報告</div></div>
+    <div class="step-b">
+      <p>貓咪偵探會依序做：<strong>①瀏覽文章 → ②啟動查核 → ③初步分析 → ④深入驗證 → ⑤產出報告</strong>。文章越長、模式越深入，等越久，通常幾十秒到一兩分鐘。</p>
+      <div class="note warn">
+        <span class="lab">⏳ 跑很久或卡住？</span>
+        <p>重新整理頁面（<span class="kbd">F5</span>）再試、換一篇試試、或先切成本地分析。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- 8 -->
+<section id="s8">
+  <h2 class="sec"><span class="n">8</span>看懂查核報告</h2>
+  <p class="lede">報告不是給你一個「真」或「假」就結束，它是把文章拆開讓你自己看清楚。</p>
+
+  <h3>8-1　逐句標示</h3>
+  <p>最核心的功能：把文章裡的<strong>每一個句子</strong>分類。</p>
+
+  <div class="demo">
+    <mark class="f">中央氣象署於 8 月 15 日發布海上颱風警報。</mark>
+    <mark class="u">據傳這波颱風是近三十年來最強的一次。</mark>
+    <mark class="o">我認為政府這次的應變根本不及格。</mark>
+    <mark class="f">交通部宣布當日高鐵停駛 12 班次。</mark>
+    <mark class="c">相關單位表示會做好質量管控。</mark>
+  </div>
+  <div class="legend">
+    <span><i class="sw" style="background:#a8e2c6;border:2px solid #1f8a5b"></i>有依據的客觀事實</span>
+    <span><i class="sw" style="background:#bcd0f7;border:2px solid #2563c9"></i>作者主觀觀點</span>
+    <span><i class="sw" style="background:#f8bcb6;border:2px solid #c2372f"></i>沒有資料佐證</span>
+    <span><i class="sw" style="background:#ffe08a;border:2px solid #b47600"></i>疑似中國用語</span>
+  </div>
+  <p class="mock-cap">▲ 標示效果示意圖（實際配色以擴充功能畫面為準）</p>
+
+  <div class="note info">
+    <span class="lab">🔍 怎麼讀這個結果？</span>
+    <p>重點<strong>不是「紅色越多就是假新聞」</strong>。專欄、社論本來就有大量藍色（觀點），這很正常。真正該警覺的是：<strong>一篇自稱「新聞報導」的文章卻塞滿紅色和藍色</strong> —— 那代表它在用意見冒充事實。</p>
+  </div>
+
+  <h3>8-2　初階分析：網域、事實、觀點、中國用語</h3>
+  <p>不用登入就看得到的四個面向：</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:22%">面向</th><th>它告訴你什麼</th></tr></thead>
+    <tbody>
+      <tr><td><strong>網域</strong></td><td>這篇文章的網站是什麼來頭 —— 有編輯台的正規媒體、個人部落格、內容農場，還是來路不明的新網站</td></tr>
+      <tr><td><strong>事實</strong></td><td>哪些句子是可以被查證的敘述</td></tr>
+      <tr><td><strong>觀點</strong></td><td>哪些句子是作者自己的看法、評論、猜測</td></tr>
+      <tr><td><strong>中國用語</strong></td><td>比對<strong>中華文化總會「兩岸差異用詞」資料庫</strong>，標出中國慣用詞</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h4>常見的中國用語對照</h4>
+  <div class="tw">
+  <table>
+    <thead><tr><th>中國用語</th><th>台灣常用說法</th></tr></thead>
+    <tbody>
+      <tr><td>質量</td><td>品質</td></tr>
+      <tr><td>視頻</td><td>影片</td></tr>
+      <tr><td>信息</td><td>資訊</td></tr>
+      <tr><td>激活</td><td>啟用</td></tr>
+      <tr><td>網絡</td><td>網路</td></tr>
+      <tr><td>軟件 / 硬件</td><td>軟體 / 硬體</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="note warn">
+    <span class="lab">⚠️ 用了中國用語 ≠ 假新聞</span>
+    <p>可能只是從對岸媒體轉載、或作者習慣用語。但如果一篇宣稱是「台灣本地新聞」的文章通篇中國用語，就值得多想一下<strong>它真正的來源是哪裡</strong>。這是「線索」，不是「證據」。</p>
+  </div>
+
+  <h3>8-3　進階分析：三大敏感議題</h3>
+  <p>設定了 API Key、走網路輔助分析時，才會啟動的深度檢視：</p>
+  <div class="grid">
+    <div class="tile"><h4><span class="emoji">🛡️</span>國防安全</h4><p>誇大軍事威脅、散播「打不贏」的失敗主義、編造軍事動態。</p></div>
+    <div class="tile"><h4><span class="emoji">🏥</span>公共衛生</h4><p>疫苗、藥品、食安的錯誤資訊，長輩群組最常見。</p></div>
+    <div class="tile"><h4><span class="emoji">💹</span>經濟貿易</h4><p>唱衰經濟、編造貿易數據、假投資訊息與詐騙廣告。</p></div>
+  </div>
+  <p>網路輔助分析還會提供<strong>外部來源輔助查證</strong>與<strong>媒體網域資訊</strong>，這是本地分析做不到的。</p>
+</section>
+
+<hr class="rule">
+
+<!-- 9 -->
+<section id="s9">
+  <h2 class="sec"><span class="n">9</span>五大類要小心的訊息</h2>
+  <p class="lede">團隊特別鎖定的五種常見誤導性題材。認得它們，比任何工具都有用。</p>
+
+  <div class="grid">
+    <div class="tile"><h4><span class="emoji">🏛️</span>冒名頂替政府</h4><p>假冒政府機關、官員名義發布消息，例如假紓困、假公告、假官網。<br><strong>自保：</strong>認明政府網址結尾是 <span class="kbd">.gov.tw</span>。</p></div>
+    <div class="tile"><h4><span class="emoji">🛡️</span>國家安全</h4><p>誇大軍事威脅、散播失敗主義、編造軍事動態製造恐慌。</p></div>
+    <div class="tile"><h4><span class="emoji">🏥</span>公共衛生</h4><p>「某某東西會致癌」「醫生不敢說的秘密」。<br><strong>自保：</strong>以衛福部、疾管署公告為準。</p></div>
+    <div class="tile"><h4><span class="emoji">💹</span>經濟貿易</h4><p>唱衰經濟、編造數據、假投資訊息。<br><strong>自保：</strong>看到「保證獲利」直接關掉。</p></div>
+    <div class="tile"><h4><span class="emoji">🈶</span>中國用語</h4><p>不是價值判斷，而是<strong>來源線索</strong>：這篇內容是否可能源自對岸的內容生產鏈。</p></div>
+  </div>
+
+  <div class="note info">
+    <span class="lab">📌 為什麼是這五類？</span>
+    <p>因為這正是「認知作戰」最常下手的題材 —— 目標不一定是讓你相信某個具體謊言，而是<strong>讓你對政府、對專業機構通通失去信任</strong>。工具幫你標出來，你自己判斷。</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- 10 -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>常見問題 Q&amp;A</h2>
+  <p class="lede">遇到狀況先看這裡。</p>
+
+  <details open>
+    <summary>一定要登入才能用嗎？</summary>
+    <div class="ans"><p><strong>不用。</strong>設定頁面寫得很明白：「本地分析不需登入」。只有三種情況才需要登入 ——<strong>儲存個人 API Key、使用網路輔助分析、使用帳號與留言功能</strong>。裝完什麼都不設定，直接按分析就能用。</p></div>
+  </details>
+
+  <details>
+    <summary>「儲存 API Key」和「測試連線」按鈕是灰色的按不下去</summary>
+    <div class="ans"><p>這是正常的，代表你<strong>還沒登入</strong>。狀態列會顯示「未登入：仍可使用本地分析；登入後才能儲存個人 API Key」。先到上面的「🔐 Google 帳號」按「登入 Google」，按鈕就會亮起來。</p></div>
+  </details>
+
+  <details>
+    <summary>要付錢嗎？</summary>
+    <div class="ans"><p><strong>擴充功能本身完全免費</strong>，公益專案，開發者標示為「非交易商」。唯一可能產生費用的是你自己去 Google 申請的 Gemini API 金鑰（一般個人用量在免費額度內）。</p></div>
+  </details>
+
+  <details>
+    <summary>手機可以用嗎？</summary>
+    <div class="ans"><p><strong>不行。</strong>Chrome 擴充功能只支援電腦版瀏覽器。</p></div>
+  </details>
+
+  <details>
+    <summary>我用 Edge / Safari / Firefox 可以嗎？</summary>
+    <div class="ans"><p><strong>Edge、Brave、Opera</strong> 等 Chromium 核心瀏覽器通常可以直接從 Chrome 商店安裝（Edge 第一次會問要不要允許其他商店的擴充功能，同意即可）。<br><strong>Safari 不行</strong>，擴充功能格式不同。</p></div>
+  </details>
+
+  <details>
+    <summary>按了沒反應 / 一直轉圈圈</summary>
+    <div class="ans">
+      <p>依序試試看：</p>
+      <p>① 重新整理頁面（<span class="kbd">F5</span>）再按一次。<br>
+      ② 確認你停在<strong>文章頁</strong>而不是首頁。<br>
+      ③ 換一篇文章試，確認是不是特定網站的問題。<br>
+      ④ 到設定頁換一種分析方式再試。<br>
+      ⑤ 用本地分析的話，確認 Chrome 是最新版（<span class="kbd">chrome://settings/help</span>）。<br>
+      ⑥ 到 <span class="kbd">chrome://extensions</span> 把它關掉再打開，或移除後重裝。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>本地分析為什麼看起來比較「陽春」？</summary>
+    <div class="ans"><p>因為它<strong>本來就是設計成這樣</strong>。設定頁面明講：本地分析「不會查詢外部來源或判定主張真偽」。它只能幫你分類論據與觀點、做摘要，換來的是<strong>文章內容完全不離開你的電腦</strong>。想要真正的查核就要用網路輔助分析。</p></div>
+  </details>
+
+  <details>
+    <summary>它會偷看我瀏覽的所有網頁嗎？</summary>
+    <div class="ans"><p>依官方說明<strong>不會</strong>。權限是「目前分頁權限：僅在用戶觸發時讀取授權頁面」——<strong>你主動按下分析的那一刻</strong>，它才會讀取那一頁。</p></div>
+  </details>
+
+  <details>
+    <summary>它說某句話「沒有依據」，是不是就代表那句是假的？</summary>
+    <div class="ans"><p><strong>不是。</strong>意思是「在能查到的範圍內找不到支持這句話的資料」。可能消息太新、可能資料在 AI 查不到的地方、也可能真的是編的。這是提醒你「這句要自己再查一下」。</p></div>
+  </details>
+
+  <details>
+    <summary>報告的結果可以完全相信嗎？</summary>
+    <div class="ans"><p><strong>不能，也不該。</strong>設定頁面自己就寫了：「分析結果是模型提供的<strong>閱讀提示</strong>，不等同已完成事實查核」。把它當成一位勤勞但偶爾出錯的助理。</p></div>
+  </details>
+
+  <details>
+    <summary>怎麼移除？</summary>
+    <div class="ans"><p>在貓咪圖示上按<strong>右鍵</strong> → 「從 Chrome 中移除」。或到 <span class="kbd">chrome://extensions</span> 找到它按「移除」。隨時可以裝回來。</p></div>
+  </details>
+
+  <details>
+    <summary>可以拿來當學校教材 / 帶長輩用嗎？</summary>
+    <div class="ans"><p>非常適合。它最大的價值不在「幫你判斷真假」，而在<strong>把「事實」和「觀點」的差別視覺化</strong>。看幾篇之後，人會自然培養出「這句是他說的還是有查證的？」的直覺 —— 那才是帶得走的能力。</p></div>
+  </details>
+
+  <details>
+    <summary>有問題要找誰？</summary>
+    <div class="ans"><p>開發團隊信箱：<strong>ai.fact.checking@gmail.com</strong>；官網 <a href="https://factcat.xyz/" target="_blank" rel="noopener">factcat.xyz</a>；也可以直接填<a href="https://factcat.xyz/feedback" target="_blank" rel="noopener">回饋問卷</a>。</p></div>
+  </details>
+</section>
+
+<hr class="rule">
+
+<!-- 11 -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>隱私與權限說明</h2>
+  <p class="lede">裝任何擴充功能之前，都該花一分鐘看這個。</p>
+
+  <h3>它要了哪些權限？</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:30%">權限</th><th>官方說明</th><th style="width:26%">白話翻譯</th></tr></thead>
+    <tbody>
+      <tr><td><strong>目前分頁權限</strong></td><td>僅在用戶觸發時讀取授權頁面</td><td>你按了分析，它才讀這一頁</td></tr>
+      <tr><td><strong>Google 身分驗證</strong></td><td>用於登入與基本帳號資料</td><td>只有你選擇登入時才用到</td></tr>
+      <tr><td><strong>連線 api.factcat.xyz</strong></td><td>偵探社分析服務</td><td>網路輔助分析時，把文章送去分析</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>選本地分析時，資料流向長什麼樣？</h3>
+  <p>設定頁面的原文說明：「<strong>新聞正文與分析結果不會送至分析伺服器；帳號驗證與留言功能仍可能連線。</strong>」</p>
+  <ul class="check">
+    <li>文章內容<strong>留在你的電腦</strong>，用 Chrome 內建模型處理</li>
+    <li>分析結果<strong>不會儲存到分析伺服器</strong></li>
+    <li>但如果你有登入或使用留言功能，那部分仍會連線</li>
+  </ul>
+
+  <h3>資料怎麼處理？</h3>
+  <ul class="check">
+    <li>商店頁隱私聲明：開發者承諾<strong>不販售資料給第三方</strong>、<strong>不用於核心功能以外的目的</strong>。</li>
+    <li>API Key：「<strong>以加密格式儲存至帳號資料</strong>，並在網路輔助分析時由服務解密使用；選擇本地分析時不會使用它」。</li>
+    <li>使用與瀏覽紀錄（頁面、操作、IP、時間、裝置、Cookie）：「僅保存必要期間，並於達成目的後<strong>刪除或匿名化</strong>」。</li>
+    <li>你可以就個人資料提出<strong>查詢、更正、刪除或停止使用</strong>的請求。</li>
+    <li>隱私權政策更新／生效日：<strong>2025-09-30</strong>（<a href="https://factcat.xyz/privacy" target="_blank" rel="noopener">factcat.xyz/privacy</a>）。</li>
+  </ul>
+
+  <div class="note warn">
+    <span class="lab">🔒 通用建議</span>
+    <p>不論用哪個工具，<strong>不要在網路銀行、健保、公司內部系統等含敏感個資的頁面上執行分析</strong>。查核工具是給公開新聞文章用的。</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- 12 -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>影片、回饋與最重要的提醒</h2>
+  <p class="lede">看完文字還是不確定？直接看官方影片最快。</p>
+
+  <h3>📺 官方安裝教學與功能介紹</h3>
+  <div class="vid"><iframe src="https://www.youtube.com/embed/cePot4fKiqg" title="真假 Meow 一下｜安裝教學與功能介紹" allowfullscreen loading="lazy"></iframe></div>
+
+  <h3>🎬 概念影片</h3>
+  <div class="vid"><iframe src="https://www.youtube.com/embed/rbnk3XD_TeY" title="概念影片" allowfullscreen loading="lazy"></iframe></div>
+
+  <div class="note tip">
+    <span class="lab">📝 用完記得回饋</span>
+    <p>團隊有開放<a href="https://factcat.xyz/feedback" target="_blank" rel="noopener">使用者回饋問卷</a>（<span class="kbd">factcat.xyz/feedback</span>）。這是免費公益專案，你的意見是他們改進的主要依據。</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="note danger" style="font-size:19.5px">
+    <span class="lab" style="font-size:22px">🐱 貓咪是偵探，不是法官</span>
+    <p>它幫你<strong>蒐集線索、整理證物、標出可疑之處</strong>。但「這篇到底可不可信」的判決，永遠是<strong>你自己</strong>下的。</p>
+    <p style="margin-bottom:0">不要因為它標綠色就照單全收，也不要因為它標紅色就直接罵人造謠。<strong>報告是討論的起點，不是終點。</strong></p>
+  </div>
+
+  <h3>搭配這三個習慣，效果加倍</h3>
+  <div class="grid">
+    <div class="tile"><h4><span class="emoji">1️⃣</span>先看來源</h4><p>誰寫的？哪個媒體？有沒有署名記者？網址對不對？</p></div>
+    <div class="tile"><h4><span class="emoji">2️⃣</span>再找第二個來源</h4><p>真有這件事，其他媒體應該也會報。只有一家在講就要小心。</p></div>
+    <div class="tile"><h4><span class="emoji">3️⃣</span>轉發前先停 10 秒</h4><p>問自己：「我是因為它是真的才轉，還是因為它讓我很生氣才轉？」</p></div>
+  </div>
+
+  <h3>台灣其他可以搭配用的查核資源</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:34%">單位</th><th>用途</th></tr></thead>
+    <tbody>
+      <tr><td><a href="https://tfc-taiwan.org.tw/" target="_blank" rel="noopener">台灣事實查核中心</a></td><td>人工查核報告，可搜尋熱門謠言</td></tr>
+      <tr><td><a href="https://cofacts.tw/" target="_blank" rel="noopener">Cofacts 真的假的</a></td><td>LINE 機器人，把可疑訊息貼給它查</td></tr>
+      <tr><td><a href="https://www.mygopen.com/" target="_blank" rel="noopener">MyGoPen 麥擱騙</a></td><td>專門破解長輩群組謠言</td></tr>
+      <tr><td><a href="https://iorg.tw/" target="_blank" rel="noopener">IORG 台灣資訊環境研究中心</a></td><td>資訊操弄研究，本工具的判讀架構參考來源</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<footer>
+  <p><strong>資料來源</strong>（皆於 2026 年 8 月 18 日查閱）：<br>
+  ・擴充功能<strong>設定頁面實際介面文字</strong>（options.html，版本 0.0.9）<br>
+  ・<a href="https://chromewebstore.google.com/detail/%E7%9C%9F%E5%81%87-meow-%E4%B8%80%E4%B8%8B/fenfegohiciopmdlifnmbhdnopkgdoeo?hl=zh-TW" target="_blank" rel="noopener">Chrome 線上應用程式商店 — 真假 Meow 一下</a>（v0.0.9，2026/8/17 更新）<br>
+  ・<a href="https://github.com/ai-cat-fact-checking/ai-cat-fact-checking.github.io" target="_blank" rel="noopener">官方網站原始碼（GitHub）</a>　・<a href="https://factcat.xyz/" target="_blank" rel="noopener">factcat.xyz</a>　・<a href="https://factcat.xyz/privacy" target="_blank" rel="noopener">隱私權政策</a>（2025-09-30）<br>
+  ・官方簡報（2026/01/26）：判讀四步驟與初階／進階分析架構<br>
+  ・<a href="https://www.thenewslens.com/article/264459" target="_blank" rel="noopener">關鍵評論網</a>　・<a href="https://www.cna.com.tw/news/aipl/202602050235.aspx" target="_blank" rel="noopener">中央社</a></p>
+
+  <p><strong>關於本文的圖片：</strong>Logo 為官方素材；瀏覽器視窗、快顯面板為<strong>示意圖</strong>（以 HTML/CSS 繪製）。設定頁面的區塊<strong>文字與選項名稱皆取自實際介面</strong>，但版面配色為重繪，實際外觀請以你電腦上的擴充功能為準。</p>
+
+  <p style="margin-bottom:0">本教學依公開資料與實際介面整理，非官方文件。功能與介面可能隨版本更新而變動。</p>
+</footer>
+
+</div>
+</body>
+</html>
