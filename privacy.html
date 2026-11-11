@@ -4,14 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>事實貓咪偵探網｜隱私權政策（Privacy Policy）</title>
+  <title>事實貓咪偵探社｜隱私權政策（Privacy Policy）</title>
   <style>
-    :root { --fg:#1f2937; --muted:#6b7280; --border:#e5e7eb; --accent:#111827; }
+    :root { --fg:#1f2937; --muted:#6b7280; --border:#e5e7eb; --accent:#111827; --soft:#f9fafb; }
     html,body{margin:0;padding:0;background:#fff;color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.75}
     .container{max-width:920px;margin:0 auto;padding:48px 20px}
     h1{font-size:1.875rem;margin:0 0 0.5rem;color:var(--accent)}
     .meta{color:var(--muted);margin-bottom:1.5rem}
     h2{font-size:1.25rem;margin:2rem 0 0.5rem}
+    h3{font-size:1.05rem;margin:1.25rem 0 0.25rem}
     p{margin:0 0 1rem}
     ul{margin:0 0 1rem 1.25rem}
     li{margin:0.25rem 0}
@@ -20,77 +21,149 @@
     a{color:#2563eb;text-decoration:none}
     a:hover{text-decoration:underline}
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+    .summary{background:var(--soft);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:0 0 1.5rem}
+    .summary p:last-child,.summary ul:last-child{margin-bottom:0}
+    .table-wrap{overflow-x:auto;margin:0 0 1rem}
+    table{border-collapse:collapse;width:100%;min-width:560px}
+    th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+    th{background:var(--soft)}
   </style>
 </head>
 <body>
   <main class="container">
     <header>
-      <h1>事實貓咪偵探網｜隱私權政策（Privacy Policy）</h1>
-      <p class="meta">更新日期：<time datetime="2025-09-30">2025-09-30</time>｜生效日期：<time datetime="2025-09-30">2025-09-30</time></p>
+      <h1>事實貓咪偵探社｜隱私權政策（Privacy Policy）</h1>
+      <p class="meta">更新日期：<time datetime="2026-11-11">2026-11-11</time>｜適用於「真假 Meow 一下」1.0.0 版起</p>
     </header>
 
-    <p>感謝您使用「事實貓咪偵探網」（以下稱「本網站」、「我們」）。為了保障您的隱私權與個人資料安全，我們特此說明本網站的隱私權保護政策。請您詳閱下列內容，當您使用本網站，即表示您同意本政策之內容。</p>
+    <div class="summary">
+      <p><strong>重點摘要</strong></p>
+      <ul>
+        <li>文章分析在你的瀏覽器裡進行。偵探社伺服器<strong>不會</strong>收到你閱讀的文章內容，也<strong>不保存</strong>你的 Gemini API Key。</li>
+        <li>只有在你按下貓咪、使用右鍵選單或快速鍵時，擴充功能才會讀取目前的頁面；它不會在背景分析你瀏覽的網站。</li>
+        <li>選擇「雲端 AI」或按下「查證」時，內容會用你自己的 API Key 直接從瀏覽器送到 Google，不經過偵探社。</li>
+        <li>偵探社伺服器只用於選用的「讀者討論」：展開討論區時會收到文章網址；登入並留言時會保存你的留言與 Google 帳號的基本資料。</li>
+        <li>我們不出售資料、不投放廣告，擴充功能本身也不使用任何流量分析工具。</li>
+      </ul>
+    </div>
+
+    <p>本政策由「事實貓咪偵探社」（以下稱「我們」）訂定，說明「真假 Meow 一下」Chrome 擴充功能、偵探社伺服器（<span class="mono">api.factcat.xyz</span>）與官方網站（<span class="mono">factcat.xyz</span>）如何處理你的資料。</p>
 
     <hr>
 
     <section>
-      <h2>一、適用範圍</h2>
-      <p>本政策適用於您使用本網站服務時，我們所蒐集、處理及利用的相關個人資料。若您透過本網站進入其他第三方網站，則該網站的隱私政策將適用於您。</p>
-    </section>
-
-    <section>
-      <h2>二、蒐集的資料種類</h2>
+      <h2>一、擴充功能什麼時候讀取網頁</h2>
       <ul>
-        <li><strong>AI Token</strong>：為了提供您所需功能，本網站可能會請您輸入或綁定 AI 服務存取憑證（如 <span class="mono">API Key</span>、<span class="mono">Access Token</span>）。我們將以加密方式安全保存，僅於您使用相關功能時調用，不作其他用途。</li>
-        <li><strong>使用與瀏覽紀錄</strong>：包括瀏覽的頁面、操作紀錄、IP 位址、使用時間、裝置資訊與 Cookie 等，僅作為網站維護、服務改善與流量分析之用。</li>
+        <li>只有在你按下工具列的貓咪、使用右鍵選單「用真假 Meow 一下分析這頁」或「分析選取的文字」，或按下快速鍵（Alt+Shift+M）時，才會讀取目前分頁的內容。</li>
+        <li>如果你在側邊欄按下「允許讀取並分析」，Chrome 會詢問是否讓擴充功能存取該網站。允許之後，在同一個網站開啟側邊欄時就不必再按一次貓咪。這項權限可以隨時在 Chrome 的擴充功能設定中收回。</li>
+        <li>Chrome 內部頁面、擴充功能商店等受限制的頁面無法分析。</li>
+        <li>頁面上的標示是用瀏覽器內建的標示功能畫出來的，該網頁本身的程式也看得到哪些文字被標示。擴充功能不會改動網頁文字，也不會把分析結果寫進網頁。</li>
       </ul>
     </section>
 
     <section>
-      <h2>三、資料的使用</h2>
-      <p>我們可能將您的資料用於：</p>
+      <h2>二、不同功能的資料流向</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>功能</th><th>送出的資料</th><th>送到哪裡</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>基本檢查</td><td>不送出任何資料</td><td>只在你的電腦上處理</td></tr>
+            <tr><td>本機 AI</td><td>不送出任何資料（第一次使用時，Chrome 會從 Google 下載內建模型）</td><td>只在你的電腦上處理</td></tr>
+            <tr><td>雲端 AI</td><td>文章的標題、內文、作者、發布時間與網站名稱</td><td>用你自己的 API Key 直接送到 Google Gemini API</td></tr>
+            <tr><td>查證</td><td>你選擇查證的說法、相關上下文，以及文章標題、網站名稱與發布時間</td><td>用你自己的 API Key 送到 Google，並使用 Google 搜尋比對資料</td></tr>
+            <tr><td>查詢這個網站的背景</td><td>網站的網域名稱</td><td>用你自己的 API Key 送到 Google</td></tr>
+            <tr><td>讀者討論（選用）</td><td>文章網址；登入並留言時，還有留言內容、標籤與 Google 登入憑證</td><td>偵探社伺服器 <span class="mono">api.factcat.xyz</span>；登入由 Google 處理</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>使用 Gemini API 時，內容的處理方式依 <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener noreferrer">Gemini API 服務條款</a> 與 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google 隱私權政策</a> 辦理。使用免費方案時，Google 可能會用這些內容改進產品；不想這樣的話，請使用付費方案，或改用基本檢查、本機 AI。</p>
+    </section>
+
+    <section>
+      <h2>三、存在你電腦上的資料</h2>
       <ul>
-        <li>提供、維護與改善本網站服務；</li>
-        <li>回覆您的詢問與提供客戶支援；</li>
-        <li>進行內部統計與分析；</li>
-        <li>依法律要求或為保護權益之必要時使用。</li>
+        <li><strong>Gemini API Key 與偏好設定</strong>：只存在這台電腦的 Chrome 裡（擴充功能的本機儲存空間），不會同步到其他裝置，也不會送到偵探社伺服器。</li>
+        <li><strong>分析結果</strong>：只暫存在瀏覽器的工作階段記憶體中，關閉瀏覽器後就會清除。</li>
+        <li><strong>網站背景查詢結果</strong>：只包含網域名稱與公開資料，在這台電腦保存 30 天，避免重複查詢。</li>
+        <li><strong>讀者討論的登入狀態</strong>：Google 發給擴充功能的登入憑證（約一小時後失效），以及你的 Google 帳號編號、名稱、Email 與大頭貼網址，用來顯示登入狀態與送出留言。</li>
       </ul>
-      <p>本網站不會出售或任意對外揭露您的個人資料。</p>
+      <p>你可以在擴充功能的「設定 → 隱私與資料」按「清除這台電腦上的所有設定與快取」一次刪除以上資料；移除擴充功能時，Chrome 也會一併刪除。</p>
     </section>
 
     <section>
-      <h2>四、Cookie 的使用</h2>
-      <p>為提升使用體驗，本網站可能使用 Cookie 或類似技術記錄您的偏好設定與使用情況。您可於瀏覽器中設定拒絕 Cookie，但部分功能可能因此無法正常運作。</p>
-    </section>
-
-    <section>
-      <h2>五、資料保存與安全</h2>
+      <h2>四、偵探社伺服器保存的資料</h2>
+      <p>偵探社伺服器只提供「讀者討論」。</p>
       <ul>
-        <li>AI Token 將以加密方式保存，並僅在您使用服務時調用。</li>
-        <li>瀏覽紀錄與使用資料僅保存必要期間，並於達成目的後刪除或匿名化處理。</li>
-        <li>我們採取合理安全措施以保護您的資料，避免未經授權的存取、洩露或濫用。</li>
+        <li><strong>讀取留言</strong>：展開討論區時，伺服器會收到文章網址，用來找出這篇文章的留言。不需要登入，也不會為此建立任何紀錄。</li>
+        <li><strong>登入與留言</strong>：你用 Google 帳號登入後留言，我們會保存 Google 帳號編號、Email、顯示名稱，以及你的留言內容、標籤、文章網址與時間。</li>
+        <li><strong>公開顯示</strong>：其他讀者看得到你的顯示名稱、留言內容、標籤與時間；Email 不會公開。</li>
+        <li><strong>伺服器紀錄</strong>：為了維護服務，伺服器會記錄請求的時間、功能類別與結果代碼，不記錄文章網址與 IP 位址。為了防止濫用，伺服器會在記憶體中短暫使用 IP 位址計算請求次數（每 15 分鐘重新計算），不會寫入紀錄。</li>
+        <li><strong>保存期間</strong>：留言與帳號資料保存到你刪除或要求刪除為止；伺服器紀錄只保留維運所需的最近一小段時間，之後自動覆寫。</li>
+      </ul>
+      <p>舊版（0.x）會在伺服器上保存加密後的 Gemini API Key，並快取文章的分析結果與網站資訊。1.0 版起不再這樣做；Chrome 把擴充功能更新到 1.0 版後，舊版留下的這些資料會從伺服器刪除。</p>
+    </section>
+
+    <section>
+      <h2>五、擴充功能使用的權限</h2>
+      <ul>
+        <li><strong>目前分頁（activeTab）</strong>：在你按下貓咪、使用右鍵選單或快速鍵之後，暫時讀取並標示目前的分頁。</li>
+        <li><strong>選用的網站存取權</strong>：只有在你按下「允許讀取並分析」時才會詢問，用來讓同一個網站下次不必再按一次貓咪。</li>
+        <li><strong>執行指令碼（scripting）、側邊欄（sidePanel）、右鍵選單（contextMenus）、儲存空間（storage）</strong>：用來在頁面上擷取文章與標示、顯示側邊欄、提供右鍵選單，以及保存你的設定。</li>
+        <li><strong>身分識別（identity）、Google 帳號資訊（googleapis.com）與偵探社服務（api.factcat.xyz）</strong>：只用於選用的「讀者討論」登入與讀取、送出留言。</li>
       </ul>
     </section>
 
     <section>
-      <h2>六、您的權利</h2>
-      <p>您可就您的個人資料向我們提出查詢、更正、刪除或停止使用之請求，我們將依相關法令規定處理。</p>
+      <h2>六、官方網站 factcat.xyz</h2>
+      <ul>
+        <li>官網由 GitHub Pages 代管，並經由 Cloudflare 提供服務；這些服務商會依其政策處理連線所需的 IP 位址等技術資料。</li>
+        <li>官網使用 Google Analytics 統計瀏覽人次與使用情況，會使用 Cookie。你可以在瀏覽器中拒絕 Cookie，或安裝 <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics 停用外掛程式</a>。</li>
+        <li>官網的短網址（例如意見回饋）會轉到 Google 表單等外部服務，填寫後的資料依該服務的政策處理。</li>
+        <li>擴充功能本身不使用 Google Analytics 或任何流量分析工具。</li>
+      </ul>
     </section>
 
     <section>
-      <h2>七、政策之修訂</h2>
-      <p>我們可能隨時修訂本政策，修訂後將公告於本網站。請您定期查閱以確保了解最新內容。</p>
+      <h2>七、我們不會做的事</h2>
+      <ul>
+        <li>不出售、出租你的資料，也不用於廣告。</li>
+        <li>不蒐集你的瀏覽紀錄，也不在背景分析你瀏覽的網站。</li>
+        <li>除了本政策所列情形，或依法令要求外，不會將你的資料提供給第三方。</li>
+        <li>本擴充功能對使用者資料的使用與傳輸，遵守 <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use" target="_blank" rel="noopener noreferrer">Chrome 線上應用程式商店使用者資料政策</a>，包括有限使用（Limited Use）規定。<br>
+          The use of information received from Google APIs will adhere to the Chrome Web Store User Data Policy, including the Limited Use requirements.</li>
+      </ul>
     </section>
 
     <section>
-      <h2>八、聯絡我們</h2>
-      <p>如您對本政策有任何疑問，請聯繫：<br>
+      <h2>八、資料安全</h2>
+      <ul>
+        <li>擴充功能與伺服器之間、擴充功能與 Google 之間的連線都使用 HTTPS 加密。</li>
+        <li>伺服器只接受由本擴充功能取得的 Google 登入憑證，並限制每個 IP 位址的請求次數。</li>
+        <li>我們會持續檢查並修正安全問題；如果你發現漏洞，歡迎來信告訴我們。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>九、你的權利</h2>
+      <p>依個人資料保護法，你可以向我們查詢、閱覽、更正、刪除你的留言或帳號資料，或要求停止處理。請來信並附上你登入時使用的 Google 帳號 Email，我們會在確認身分後盡快處理。</p>
+    </section>
+
+    <section>
+      <h2>十、政策修訂</h2>
+      <p>我們可能修訂本政策，修訂後會公告於本頁並更新上方日期。重大變更也會在擴充功能的更新說明中告知。</p>
+    </section>
+
+    <section>
+      <h2>十一、聯絡我們</h2>
+      <p>如果你對本政策有任何疑問，請聯繫：<br>
         電子郵件：<a href="mailto:ai.fact.checking@gmail.com">ai.fact.checking@gmail.com</a>
       </p>
     </section>
 
     <hr>
-    <blockquote>本政策中文版本為準。</blockquote>
+    <blockquote>本政策以中文版本為準。</blockquote>
   </main>
 </body>
 </html>
